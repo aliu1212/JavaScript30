@@ -60,6 +60,11 @@
   </style>
 
   <script>
+
+
+/*
+** FIRST ATTEMPT
+
     let root = document.documentElement;
 
     document.querySelector('#spacing')
@@ -76,6 +81,20 @@
       .addEventListener('change', function(e) {
         root.style.setProperty('--base', `${ e.target.value }`)
       })
+*/
+
+    //sol'n style
+    const inputs = document.querySelectorAll('.controls input');
+
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].addEventListener('change', update);
+      inputs[i].addEventListener('mousemove', update);
+    }
+
+    function update() {
+      let suffix = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${ this.name }`, this.value + suffix);
+    }
 
   </script>
 
