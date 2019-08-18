@@ -76,7 +76,21 @@
     }
 
     .panel.open {
+      flex: 5;
       font-size: 40px;
+    }
+
+    .panel > *:first-child {
+      transform: translateY(-500%);
+    }
+    .panel > *:last-child {
+      transform: translateY(500%);
+    }
+    .panel.open-active > *:first-child {
+      transform: translateY(0);
+    }
+    .panel.open-active > *:last-child {
+      transform: translateY(0);
     }
 
   </style>
@@ -111,7 +125,21 @@
   </div>
 
   <script>
+    const allPanels = Array.from(document.querySelectorAll('.panel'));
+    for (let i = 0; i < allPanels.length; i++) {
+      allPanels[i].addEventListener('click', openExpand);
+      allPanels[i].addEventListener('transitionend', transitionWords)
+    }
 
+    function openExpand() {
+      this.classList.toggle('open');
+    }
+
+    function transitionWords(e) {
+      if (e.propertyName === 'flex-grow') {
+        this.classList.toggle('open-active');
+      }
+    }
   </script>
 
 
